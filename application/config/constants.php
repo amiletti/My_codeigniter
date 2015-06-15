@@ -84,3 +84,11 @@ define('EXIT_USER_INPUT', 7); // invalid user input
 define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+|--------------------------------------------------------------------------
+| Custom constants
+|--------------------------------------------------------------------------
+*/
+define('EMAIL_FROM_EMAIL', 'noreply@example.com'); // default email sender
+define('EMAIL_FROM_NAME', 'example name'); // default email sender

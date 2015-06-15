@@ -29,7 +29,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -355,12 +355,12 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
-$config['sess_match_ip'] = FALSE;
-$config['sess_time_to_update'] = 300;
+$config['sess_driver']             = 'database';
+$config['sess_cookie_name']        = 'ci_session';
+$config['sess_expiration']         = 7200;
+$config['sess_save_path']          = 'sessions';
+$config['sess_match_ip']           = FALSE;
+$config['sess_time_to_update']     = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 
 /*
@@ -498,3 +498,22 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+| -------------------------------------------------------------------
+|  Native Auto-load
+| -------------------------------------------------------------------
+| 
+| Nothing to do with config/autoload.php, this allows PHP autoload to work
+| for base controllers and some third-party libraries.
+|
+*/
+
+function __autoload($class)
+{
+  $paths = array('core/');
+  foreach($paths as $k => $v)
+  {
+    if(file_exists(APPPATH.$v.$class.'.php')) { include_once( APPPATH.$v.$class.'.php' ); }
+  }
+}
