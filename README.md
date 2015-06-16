@@ -9,7 +9,8 @@ The original codeigniter core with some little improvements
 - Jakub Vrána for <a href="http://www.adminer.org/">Adminer</a>
 
 # Install
-Simply copy all repo in your htdocs. I've used sqlite, then even the user, roles and permission works. If you want you can change db drive by porting the schema
+Simply copy all repo in your htdocs. I've used sqlite, then even the user, roles and permission works.
+If you want you can change db driver by porting the schema
 
 # Improvements
 - CI base classes
