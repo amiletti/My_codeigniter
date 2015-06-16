@@ -41,6 +41,12 @@ class Login extends Public_Controller
       if($this->user_model->change_password($email))
       {
         $this->alerts->add("We had sent you an email with a link to change your password", 'info');
+
+        // obviously delete this in production
+        $user = $this->user_model->get_by('email', $email);
+        $this->alerts->add("The link, only for demostration is <a href='".site_url('/login/'.$user->token)."'>".site_url('/login/'.$user->token)."</a>", 'info');
+        // // obviously delete this in production
+
         redirect('/');
       }
     }

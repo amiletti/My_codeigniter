@@ -1,16 +1,18 @@
 <?php $this->load->view('/themes/public/header') ?>
-
+<h4 class="page-header">Login</h4>
 <form class="form-horizontal" action="" method="post">
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Username or email</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" placeholder="Username or email" value="<?php echo set_value('email', '') ?>" name="email">
+      <small>Default: "admin" or "admin@example.com"</small>
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" placeholder="Password" value="">
+      <input type="password" class="form-control" placeholder="Password" value="" name="password">
+      <small>Default: "password"</small>
     </div>
   </div>
   <div class="form-group">

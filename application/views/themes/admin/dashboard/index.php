@@ -1,21 +1,9 @@
-<?php $this->load->view('/themes/public/header') ?>
-
+<?php $this->load->view('/themes/admin/header') ?>
+<h4 class="page-header">Admin area</h4>
 <p>Your userdata</p>
-<code>
-  <?php
-  echo '<pre>';
-  print_r($this->user);
-  echo '</pre>';
-  ?>
-</code>
+<pre><?php print_r($this->user); ?></pre>
 
 <p>Your session data</p>
-<code>
-  <?php
-  echo '<pre>';
-  print_r($this->session->userdata());
-  echo '</pre>';
-  ?>
-</code>
+<pre><?php print_r($this->session->userdata()); ?></pre>
 
-<?php $this->load->view('/themes/public/footer') ?>
+<?php $this->load->view('/themes/admin/footer') ?>

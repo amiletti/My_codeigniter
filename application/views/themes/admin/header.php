@@ -24,6 +24,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <?php if($this->user): ?>
+          <li><a href="/change_password">change password</a></li>
           <li><a href="/logout">logout</a></li>
         <?php else: ?>
           <li><a href="/login">login</a></li>
@@ -35,4 +36,4 @@
 
 <div class="container theme-showcase" role="main">
 
-<?php $this->load->view('themes/public/alerts'); ?>
+<?php $this->load->view('themes/admin/alerts'); ?>
