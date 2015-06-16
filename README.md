@@ -18,3 +18,5 @@ Simply copy all repo in your htdocs. I've used sqlite, then even the user, roles
 - Bootstrap
 - User and roles
 - Uri based permissions
+- ability to recover and change password
+- remember login via cookie
