@@ -1,6 +1,4 @@
-<?php $this->load->view('/themes/admin/header') ?>
-
-<p>You are currently logged in. <a href="/logout">Logout</a></p>
+<?php $this->load->view('/themes/public/header') ?>
 
 <p>Your userdata</p>
 <code>
@@ -20,4 +18,4 @@
   ?>
 </code>
 
-<?php $this->load->view('/themes/admin/footer') ?>
+<?php $this->load->view('/themes/public/footer') ?>

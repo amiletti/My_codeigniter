@@ -3,9 +3,21 @@
 class Admin_controller extends MY_Controller
 {
 
-    public function __construct()
+  public function __construct()
+  {
+    parent::__construct();
+
+    if( ! $this->user)
     {
-      parent::__construct();
+      $this->alerts->add('Login non effettuato', 'error');
+      redirect('/login');
     }
+
+    if( ! $this->user_model->has_permission_by_uri())
+    {
+      $this->alerts->add("You have not right to see '/".uri_string()."'", 'error');
+      redirect('/');
+    }
+  }
 
 }

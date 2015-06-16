@@ -501,7 +501,7 @@ $config['proxy_ips'] = '';
 
 /*
 | -------------------------------------------------------------------
-|  Native Auto-load
+|  Native php Auto-load
 | -------------------------------------------------------------------
 | 
 | Nothing to do with config/autoload.php, this allows PHP autoload to work

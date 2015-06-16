@@ -6,14 +6,108 @@
   <p>You are not logged in. <a href="/login">Login</a></p>
 <?php endif ?>
 
-<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+<h4 class="page-header">Thanks to</h4>
+<ul>
+  <li>First of all the codeigniter community</li>
+  <li>Phil Sturgeon for the <a href="https://philsturgeon.uk/blog/2010/02/CodeIgniter-Base-Classes-Keeping-it-DRY/">Bases classes</a> method</li>
+  <li>Jamie Rumbelow for the <a href="http://github.com/jamierumbelow/codeigniter-base-model">CI base model</a></li>
+  <li>Jens Segers for the <a href="https://github.com/jenssegers/codeigniter-message-library">CI messages library</a></li>
+</ul>
 
-<p>If you would like to edit this page you'll find it located at:</p>
-<code>application/views/themes/public/index.php</code>
+<h4 class="page-header">Permissions</h4>
+<p>To manage permissions simply set in "permissions" column of "roles" table a json array with the uri allowed for that role.<br/>In permissions you can use the normal codeigniter routing rules: regex and ":any" and ":num" placehodlder.</p>
+<pre>[
+  "admin/specific/page", // view this page 
+  "admin/users/:num/edit", // edit user
+  "admin/cron/:any/check", // run cron for usual check
+  "admin/.*", // view all admin page
+  ".*" // be a ninja
+]</pre>
+<p>When you want to check rights, simply check if this method return TRUE</p>
+<pre>$this->user_model->has_permission_by_uri()</pre>
 
-<p>The corresponding controller for this page is found at:</p>
-<code>application/controllers/Welcome.php</code>
+<h4 class="page-header">CI base classes</h4>
+<p>Normally I use base classes to manage my application. In the /application/core directory i have MY_Controller that extend CI_Controller.<br/>
+In MY_Controller i do the things that needed to always doing (check user, autoload ecc...).<br/>
+After this i create a base controllers that extend MY_Controller</p>
+<pre>/application/core/Public_Controller.php // for frontend
+  /application/core/Admin_Controller.php // for backend</pre>
+<p>In my normal workflow I extend the appropriate base controller from the controller in /application/controllers dir<br/>
+For more detail about this, simply look in /application/core the MY_Controller.php and the Public and Admin Controller in the same dir.</p>
 
-<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+<h4 class="page-header">Autoload</h4>
+<p>I' ve two way to autoload resources, the simplest way is to add the resources that need to be loaded in MY_controller.</p>
+<p>Moreover I autoload all classes in /application/core, to doing this I put this code in config/config.php</p>
+<pre>/*
+| -------------------------------------------------------------------
+|  Native php Auto-load
+| -------------------------------------------------------------------
+| 
+| Nothing to do with config/autoload.php, this allows PHP autoload to work
+| for base controllers and some third-party libraries.
+|
+*/
+
+function __autoload($class)
+{
+  $paths = array('core/');
+  foreach($paths as $k => $v)
+  {
+    if(file_exists(APPPATH.$v.$class.'.php')) { include_once( APPPATH.$v.$class.'.php' ); }
+  }
+}</pre>
+
+<h4 class="page-header">Database schema <small>sqlite</small></h4>
+<pre>
+
+-- Adminer 4.1.0 SQLite 3 dump
+
+DROP TABLE IF EXISTS "roles";
+CREATE TABLE "roles" (
+  "role_id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "name" text NOT NULL,
+  "permissions" text NOT NULL
+);
+
+INSERT INTO "roles" ("role_id", "name", "permissions") VALUES (1, 'admin',  '["asdf/asdf","asdf/:any/:num/asdf",".*"]');
+
+DROP TABLE IF EXISTS "sessions";
+CREATE TABLE "sessions" (
+  "id" text NOT NULL,
+  "ip_address" text NOT NULL,
+  "timestamp" integer NOT NULL,
+  "data" text NOT NULL
+);
+
+
+DROP TABLE IF EXISTS "users";
+CREATE TABLE "users" (
+  "user_id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "username" text NOT NULL,
+  "email" text NOT NULL,
+  "password" text NOT NULL,
+  "name" text NOT NULL,
+  "surname" text NOT NULL,
+  "status" integer(1) NOT NULL,
+  "logged_at" text NOT NULL,
+  "created_at" text NOT NULL,
+  "updated_at" text NOT NULL,
+  "token" text NOT NULL
+);
+
+INSERT INTO "users" ("user_id", "username", "email", "password", "name", "surname", "status", "logged_at", "created_at", "updated_at", "token") VALUES (1,  'admin',  'admin@example.com',  '3da541559918a808c2402bba5012f6c60b27661c', 'admin',  'istrator', 1,  '2015-06-16 09:00:41',  '2015-06-15 09:00:41',  '2015-06-16 09:08:50',  '');
+
+DROP TABLE IF EXISTS "users_x_roles";
+CREATE TABLE "users_x_roles" (
+  "user_id" integer NOT NULL,
+  "role_id" integer NOT NULL,
+  FOREIGN KEY ("user_id") REFERENCES "users" ("user_id") ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id") ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+INSERT INTO "users_x_roles" ("user_id", "role_id") VALUES (1, 1);
+
+--
+</pre>
 
 <?php $this->load->view('/themes/public/footer') ?>

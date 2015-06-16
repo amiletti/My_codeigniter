@@ -8,6 +8,20 @@ class User_model extends MY_Model {
   public $before_create = array('created_at');
   public $before_update = array('updated_at');
 
+  function has_permission_by_uri($user_id = FALSE, $uri = FALSE)
+  {
+    if( ! $this->user) { return FALSE; }
+
+    if( ! $user_id) { $user_id = $this->user->user_id; }
+    if( ! $uri) { $uri = uri_string(); }
+
+    foreach($this->user->permissions as $k => $v)
+    {
+      if(preg_match("/^".$v."$/", $uri)) { return TRUE; }
+    }
+    return FALSE;
+  }
+
   function login_by_cookie()
   {
     $token = get_cookie('token');
