@@ -16,7 +16,7 @@
 </ul>
 
 <h4 class="page-header">Permissions</h4>
-<p>To manage permissions simply set in "permissions" column of "roles" table a json array with the uri allowed for that role.<br/>In permissions you can use the normal codeigniter routing rules: regex and ":any" and ":num" placehodlder.</p>
+<p>To manage permissions simply set in "roles.permissions" a json array with the uri allowed for that role.<br/>In permissions you can use the normal codeigniter routing rules: regex and ":any" or ":num" placehodlder.</p>
 <pre>[
   "admin/specific/page", // view this page 
   "admin/users/:num/edit", // edit user
@@ -35,6 +35,16 @@ After this i create a base controllers that extend MY_Controller</p>
 /application/core/Admin_Controller.php // for backend</pre>
 <p>In my normal workflow I extend the appropriate base controller from the controller in /application/controllers dir<br/>
 For more detail about this, simply look in /application/core the MY_Controller.php and the Public and Admin Controller in the same dir.</p>
+
+<h4 class="page-header">File manager</h4>
+<p>You can manage files simply by upload and manage them via file_id. When you have a file uploaded via post, if you save them using this method</p>
+<pre>$this->file_model->do_upload($name = 'file', $allowed_types = 'gif|jpg|png', $max_size = 2048);</pre>
+<p>You have a file saved in</p>
+<pre>$this->file_model->upload_dir.date('/Y/m/d/').$filename;</pre>
+<p>The name of the file is automatically cleaned, and a file_id, or an array with two or more file_id, are returned from the method. You can use "multiple" html5 attribute on input file to upload multiple files at once</p>
+<p>Config is hardly coded in</p>
+<pre>/application/model/crud/File_model.php</pre>
+<p>If you want you can move config paramenter to config dir</p>
 
 <h4 class="page-header">Autoload</h4>
 <p>I' ve two way to autoload resources, the simplest way is to add the resources that need to be loaded in MY_controller.</p>
