@@ -1,5 +1,6 @@
 <?php $this->load->view('/themes/admin/header') ?>
-<h4 class="page-header">Chnange password</h4>
+
+<h4 class="page-header">Change password</h4>
 <form class="form-horizontal" action="" method="post">
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Password</label>

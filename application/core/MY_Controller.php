@@ -14,6 +14,7 @@ class MY_Controller extends CI_Controller
 
       // MY model base resources
       $this->load->model('crud/user_model');
+      $this->load->model('crud/file_model');
 
       // try reautenticate user via token
       if( ! $this->session->userdata('user_id')) { $this->user_model->login_by_cookie(); }

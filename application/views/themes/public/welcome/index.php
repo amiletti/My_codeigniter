@@ -9,9 +9,10 @@
 <h4 class="page-header">Thanks to</h4>
 <ul>
   <li>First of all the codeigniter community</li>
-  <li>Phil Sturgeon for the <a href="https://philsturgeon.uk/blog/2010/02/CodeIgniter-Base-Classes-Keeping-it-DRY/">Bases classes</a> method</li>
-  <li>Jamie Rumbelow for the <a href="http://github.com/jamierumbelow/codeigniter-base-model">CI base model</a></li>
-  <li>Jens Segers for the <a href="https://github.com/jenssegers/codeigniter-message-library">CI messages library</a></li>
+  <li>Phil Sturgeon for <a href="https://philsturgeon.uk/blog/2010/02/CodeIgniter-Base-Classes-Keeping-it-DRY/">Bases classes</a> method</li>
+  <li>Jamie Rumbelow for <a href="http://github.com/jamierumbelow/codeigniter-base-model">CI base model</a></li>
+  <li>Jens Segers for <a href="https://github.com/jenssegers/codeigniter-message-library">CI messages library</a></li>
+  <li>Jakub Vrána for <a href="http://www.adminer.org/">Adminer</a></li>
 </ul>
 
 <h4 class="page-header">Permissions</h4>
@@ -21,7 +22,7 @@
   "admin/users/:num/edit", // edit user
   "admin/cron/:any/check", // run cron for usual check
   "admin/.*", // view all admin page
-  ".*" // be a ninja
+  ".*" // become a ninja
 ]</pre>
 <p>When you want to check rights, simply check if this method return TRUE</p>
 <pre>$this->user_model->has_permission_by_uri()</pre>
@@ -31,7 +32,7 @@
 In MY_Controller i do the things that needed to always doing (check user, autoload ecc...).<br/>
 After this i create a base controllers that extend MY_Controller</p>
 <pre>/application/core/Public_Controller.php // for frontend
-  /application/core/Admin_Controller.php // for backend</pre>
+/application/core/Admin_Controller.php // for backend</pre>
 <p>In my normal workflow I extend the appropriate base controller from the controller in /application/controllers dir<br/>
 For more detail about this, simply look in /application/core the MY_Controller.php and the Public and Admin Controller in the same dir.</p>
 
@@ -58,9 +59,19 @@ function __autoload($class)
 }</pre>
 
 <h4 class="page-header">Database schema <small>sqlite</small></h4>
-<pre>
+<pre>-- Adminer 4.1.0 SQLite 3 dump
 
--- Adminer 4.1.0 SQLite 3 dump
+DROP TABLE IF EXISTS "files";
+CREATE TABLE "files" (
+  "file_id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "size" text NOT NULL,
+  "name" text NOT NULL,
+  "path" text NOT NULL,
+  "type" text NOT NULL,
+  "created_at" text NOT NULL,
+  "created_by" integer NULL
+);
+
 
 DROP TABLE IF EXISTS "roles";
 CREATE TABLE "roles" (
@@ -69,7 +80,7 @@ CREATE TABLE "roles" (
   "permissions" text NOT NULL
 );
 
-INSERT INTO "roles" ("role_id", "name", "permissions") VALUES (1, 'admin',  '["asdf/asdf","asdf/:any/:num/asdf",".*"]');
+INSERT INTO "roles" ("role_id", "name", "permissions") VALUES (1, 'admin',  '["admin/specific/page","admin/users/:num/edit","admin/cron/:any/check","admin/.*",".*"]');
 
 DROP TABLE IF EXISTS "sessions";
 CREATE TABLE "sessions" (
@@ -95,7 +106,7 @@ CREATE TABLE "users" (
   "token" text NOT NULL
 );
 
-INSERT INTO "users" ("user_id", "username", "email", "password", "name", "surname", "status", "logged_at", "created_at", "updated_at", "token") VALUES (1,  'admin',  'admin@example.com',  '3da541559918a808c2402bba5012f6c60b27661c', 'admin',  'istrator', 1,  '2015-06-16 09:00:41',  '2015-06-15 09:00:41',  '2015-06-16 09:08:50',  '');
+INSERT INTO "users" ("user_id", "username", "email", "password", "name", "surname", "status", "logged_at", "created_at", "updated_at", "token") VALUES (1,  'admin',  'admin@example.com',  '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'admin',  'istrator', 1,  '2015-06-17 09:50:26',  '2015-06-15 09:00:41',  '2015-06-17 09:50:26',  '');
 
 DROP TABLE IF EXISTS "users_x_roles";
 CREATE TABLE "users_x_roles" (
@@ -107,7 +118,6 @@ CREATE TABLE "users_x_roles" (
 
 INSERT INTO "users_x_roles" ("user_id", "role_id") VALUES (1, 1);
 
---
-</pre>
+--</pre>
 
 <?php $this->load->view('/themes/public/footer') ?>

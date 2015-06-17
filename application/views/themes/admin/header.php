@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 
-  <?php $this->load->view('themes/public/head'); ?>
+  <?php $this->load->view('themes/admin/head'); ?>
 
 </head>
 <body role="document">
@@ -25,6 +25,7 @@
       <ul class="nav navbar-nav navbar-right">
         <?php if($this->user): ?>
           <li><a href="/change_password">change password</a></li>
+          <li><a href="/admin/file_upload">file upload</a></li>
           <li><a href="/logout">logout</a></li>
         <?php else: ?>
           <li><a href="/login">login</a></li>
