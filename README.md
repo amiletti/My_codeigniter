@@ -22,3 +22,4 @@ If you want you can change db driver by porting the schema to another driver. Yo
 - Uri based permissions
 - ability to recover and change password
 - remember login via cookie
+- file manager with model and db
