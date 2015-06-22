@@ -9,7 +9,7 @@ The original codeigniter 3.0 with some little improvements
 - Jakub Vrána for <a href="http://www.adminer.org/">Adminer</a>
 
 # Install
-Simply copy all repo in your htdocs. I've used sqlite, then all the app, included user, roles and permission management should work without any other action.
+Simply copy this repository in your htdocs. I've used sqlite, then all the app, included user, roles and permission management should work without other action.
 
 If you want you can change db driver by porting the schema to another driver. You found the current schema directly in adminer or in the main view of the app.
 
