@@ -20,6 +20,6 @@ If you want you can change db driver by porting the schema to another driver. Yo
 - Bootstrap
 - User and roles
 - Uri based permissions
-- ability to recover and change password
-- remember login via cookie
+- Ability to recover and change password
+- Remember login via cookie
 - file manager with model and db table
