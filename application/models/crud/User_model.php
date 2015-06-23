@@ -34,12 +34,7 @@ class User_model extends MY_Model {
     $user = $this->get_by('token', $token);
     if($user)
     {
-      $data = array(
-        'user_id' => $user->user_id, 
-        'logged_at' => $user->logged_at
-      );
-      $this->session->set_userdata($data);
-
+      $this->session->set_userdata(array('user_id' => $user->user_id));
       $user->token = '';
       $user->logged_at = date('Y-m-d H:i:s');
       $this->update($user->user_id, $user);
@@ -96,7 +91,6 @@ class User_model extends MY_Model {
       return FALSE;
     }
     
-    $this->session->set_userdata(array('logged_at' => $user->logged_at));
     $user->logged_at = date('Y-m-d H:i:s');
     if($remember)
     {
